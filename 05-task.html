@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 05</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #userList {
+            width: 200px;
+            display: inline-block;
+        }
+        #userList>li {
+            cursor: pointer;
+            list-style: none;
+        }
+        #userList>li:hover {
+            background-color: orange;
+        }
+        #output {
+            display: inline-block;
+            border: 1px solid gray;
+            padding: 10px;
+            vertical-align: top;
+            margin-top: 20px;
+            width: 300px;
+            min-height: 180px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="userList"></ul>
+    <div id="output"></div>
+    <script>
+        let users = 
+        [
+            {
+                name: { first: 'Peter', last: 'Parker', email: 'SpiderMan@gmail.com' },
+                age: 23, balance: '$12', company: 'Avengers'
+            },
+            {
+                name: { first: 'Tony', last: 'Stark', email: 'IronMan@gmail.com' },
+                age: 53, balance: '$999999999999', company: 'Avengers'
+            },
+            {
+                name: { first: 'Loki', last: 'Laufeyson', email: 'Loki@gmail.com' },
+                age: 1048, balance: '$777777', company: 'Asgard'
+            }
+        ];
+        function mouseEnterHandler(e) 
+        {
+            const index = e.target.dataset.userNumber;
+            const user = users[index];
+            const output = document.getElementById("output");
+            output.innerHTML = '';
+            var name = user.name.first + ' ' + user.name.last;
+            var email = 'Email: ' + user.name.email;
+            var age = 'Age: ' + user.age;
+            var balance = 'Balance: ' + user.balance;
+            var company = 'Company: ' + user.company;
+            output.innerHTML += name + '<br>';
+            output.innerHTML += email + '<br>';
+            output.innerHTML += age + '<br>';
+            output.innerHTML += balance + '<br>';
+            output.innerHTML += company;
+        }
+        let userList = document.querySelector("#userList");
+        for (let index = 0; index < users.length; index++) 
+        {
+            const currentUser = users[index];
+            let li = document.createElement("li");
+            li.textContent = currentUser.name.first + " " + currentUser.name.last;
+            li.dataset.userNumber = index;
+            li.addEventListener("mouseenter", mouseEnterHandler);
+            userList.append(li);
+        }
+    </script>
+</body>
+</html>
